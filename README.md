@@ -1,3 +1,5 @@
+# THIS IS NOT CURRENTLY WORKING
+
 # danger-discord
 
 A description of danger-discord.
