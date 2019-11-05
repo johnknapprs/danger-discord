@@ -26,7 +26,7 @@ module Danger
     def initialize(dangerfile)
       super(dangerfile)
 
-      @api_token = ENV['DISCORD_WEBHOOK_URL']
+      @api_token = ENV['DISCORD_WEBHOOK_URL'] ||= raise('Unable to find DISCORD_WEBHOOK_URL')
     end
 
     # Notify Discord Channel
@@ -52,20 +52,6 @@ module Danger
           embed.timestamp = Time.now
         end
       end
-
-      # attachments = text.nil? ? report : []
-      # text ||= '<http://danger.systems/|Danger> reports'
-      # @conn.post do |req|
-      #   req.url 'chat.postMessage'
-      #   req.params = {
-      #     token: @api_token,
-      #     channel: channel,
-      #     text: text,
-      #     attachments: attachments.to_json,
-      #     link_names: 1,
-      #     **opts
-      #   }
-      # end
     end
   end
 end
