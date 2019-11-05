@@ -10,5 +10,6 @@ rvm:
   - 2.6.5
 
 script:
+    - gem install bundler -v 2.0.2
     - bundle exec rake spec
     - bundle exec danger
