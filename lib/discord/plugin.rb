@@ -18,16 +18,54 @@ module Danger
   #
   class DangerDiscord < Plugin
 
-    # An attribute that you can read/write from your Dangerfile
+    # API token to authenticate with Discord API
     #
-    # @return   [Array<String>]
-    attr_accessor :my_attribute
+    # @return [String]
+    attr_accessor :api_token
 
-    # A method that you can call from your Dangerfile
-    # @return   [Array<String>]
+    def initialize(dangerfile)
+      super(dangerfile)
+
+      @api_token = ENV['DISCORD_WEBHOOK_URL']
+    end
+
+    # Notify Discord Channel
     #
-    def warn_on_mondays
-      warn 'Trying to merge code on a Monday' if Date.today.wday == 1
+    # @param   [String] channel
+    #          It is channel to be notified, defaults to '#general'
+    # @param   [String] text
+    #          text message posted to slack, defaults to nil.
+    #          if nil, this method post danger reports to slack.
+    # @param   [Hash] **opts
+    # @return [void]
+    def notify(channel: '#general', text: nil, **opts)
+      # webhook url implimentation
+      require 'discordrb/webhooks'
+
+      client = Discordrb::Webhooks::Client.new(url: @api_token)
+
+      client.execute do |builder|
+        builder.content = 'Hello world!'
+        builder.add_embed do |embed|
+          embed.title = 'Embed title'
+          embed.description = 'Embed description'
+          embed.timestamp = Time.now
+        end
+      end
+
+      # attachments = text.nil? ? report : []
+      # text ||= '<http://danger.systems/|Danger> reports'
+      # @conn.post do |req|
+      #   req.url 'chat.postMessage'
+      #   req.params = {
+      #     token: @api_token,
+      #     channel: channel,
+      #     text: text,
+      #     attachments: attachments.to_json,
+      #     link_names: 1,
+      #     **opts
+      #   }
+      # end
     end
   end
 end

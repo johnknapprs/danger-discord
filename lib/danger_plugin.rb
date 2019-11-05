@@ -1,1 +1,1 @@
-require "discord/plugin"
+require 'discord/plugin'
