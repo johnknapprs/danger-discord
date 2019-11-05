@@ -45,10 +45,10 @@ module Danger
       client = Discordrb::Webhooks::Client.new(url: @api_token)
 
       client.execute do |builder|
-        builder.content = 'Hello world!'
+        builder.content = text
         builder.add_embed do |embed|
-          embed.title = 'Embed title'
-          embed.description = 'Embed description'
+          embed.title = 'This is an Embed Title'
+          embed.description = 'Here is an Embed description'
           embed.timestamp = Time.now
         end
       end
