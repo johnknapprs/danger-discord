@@ -17,7 +17,6 @@ module Danger
   # @tags monday, weekends, time, rattata
   #
   class DangerDiscord < Plugin
-
     # API token to authenticate with Discord API
     #
     # @return [String]
