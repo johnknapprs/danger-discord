@@ -8,5 +8,5 @@ sentiment.post_analysis
 
 # Send a message in Discord
 discord.notify(
-    content: ['Sentiment Analysis of PR', sentiment.formatted_analysis].join("\n")
+  content: ['Sentiment Analysis of PR', sentiment.formatted_analysis].join("\n")
 )
