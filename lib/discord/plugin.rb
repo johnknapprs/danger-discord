@@ -37,20 +37,12 @@ module Danger
     #          if nil, this method post danger reports to slack.
     # @param   [Hash] **opts
     # @return [void]
-    def notify(channel: '#general', text: nil, **opts)
-      # webhook url implimentation
+    def notify(channel: '#general', content: nil, **opts)
       require 'discordrb/webhooks'
 
       client = Discordrb::Webhooks::Client.new(url: @api_token)
 
-      client.execute do |builder|
-        builder.content = text
-        builder.add_embed do |embed|
-          embed.title = 'This is an Embed Title'
-          embed.description = 'Here is an Embed description'
-          embed.timestamp = Time.now
-        end
-      end
+      client.execute { |builder| builder.content = content }
     end
   end
 end

@@ -1,11 +1,12 @@
-# # Make it more obvious that a PR is a work in progress and shouldn't be merged yet
-# warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
+# Always require a description of work
+if github.pr_body.length < 5
+  warn 'Please provide a summary in the Pull Request description'
+end
 
-# # Warn when there is a big PR
-# warn("Big PR") if git.lines_of_code > 500
+# Post to the pull request
+sentiment.post_analysis
 
-# # Don't let testing shortcuts get into master by accident
-# fail("fdescribe left in tests") if `grep -r fdescribe specs/ `.length > 1
-# fail("fit left in tests") if `grep -r fit specs/ `.length > 1
-
-discord.notify(channel: '#general', text: 'this is a test')
+# Send a message in Discord
+discord.notify(
+    content: ['Sentiment Analysis of PR', sentiment.formatted_analysis].join("\n")
+)
