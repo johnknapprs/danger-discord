@@ -1,5 +1,4 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'discord/gem_version.rb'
 
@@ -8,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.version       = Discord::VERSION
   spec.authors       = ['John Knapp']
   spec.email         = ['knappj2@gmail.com']
-  spec.description   = %q{A short description of danger-discord.}
-  spec.summary       = %q{A longer description of danger-discord.}
-  spec.homepage      = 'https://github.com/John Knapp/danger-discord'
+  spec.description   = 'A short description of danger-discord.'
+  spec.summary       = 'A longer description of danger-discord.'
+  spec.homepage      = 'https://github.com/johnknapprs/danger-discord'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -19,17 +18,18 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'danger-plugin-api', '~> 1.0'
+  spec.add_runtime_dependency 'discordrb', '~>3.3.0'
 
   # General ruby development
-  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'bundler', '~> 2.0.2'
   spec.add_development_dependency 'rake', '~> 10.0'
 
   # Testing support
   spec.add_development_dependency 'rspec', '~> 3.4'
 
   # Linting code and docs
-  spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "yard"
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'yard'
 
   # Makes testing easy via `bundle exec guard`
   spec.add_development_dependency 'guard', '~> 2.14'

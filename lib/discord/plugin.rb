@@ -17,17 +17,32 @@ module Danger
   # @tags monday, weekends, time, rattata
   #
   class DangerDiscord < Plugin
-
-    # An attribute that you can read/write from your Dangerfile
+    # API token to authenticate with Discord API
     #
-    # @return   [Array<String>]
-    attr_accessor :my_attribute
+    # @return [String]
+    attr_accessor :api_token
 
-    # A method that you can call from your Dangerfile
-    # @return   [Array<String>]
+    def initialize(dangerfile)
+      super(dangerfile)
+
+      @api_token = ENV['DISCORD_WEBHOOK_URL'] ||= raise('Unable to find DISCORD_WEBHOOK_URL')
+    end
+
+    # Notify Discord Channel
     #
-    def warn_on_mondays
-      warn 'Trying to merge code on a Monday' if Date.today.wday == 1
+    # @param   [String] channel
+    #          It is channel to be notified, defaults to '#general'
+    # @param   [String] text
+    #          text message posted to slack, defaults to nil.
+    #          if nil, this method post danger reports to slack.
+    # @param   [Hash] **opts
+    # @return [void]
+    def notify(channel: '#general', content: nil, **opts)
+      require 'discordrb/webhooks'
+
+      client = Discordrb::Webhooks::Client.new(url: @api_token)
+
+      client.execute { |builder| builder.content = content }
     end
   end
 end

@@ -1,1 +1,1 @@
-require "discord/gem_version"
+require 'discord/gem_version'
