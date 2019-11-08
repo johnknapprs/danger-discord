@@ -30,11 +30,9 @@ module Danger
 
     # Notify Discord Channel
     #
-    # @param   [String] channel
-    #          It is channel to be notified, defaults to '#general'
     # @param   [String] text
-    #          text message posted to slack, defaults to nil.
-    #          if nil, this method post danger reports to slack.
+    #          text message posted to discord, defaults to nil.
+    #          if nil, this method post danger reports to discord.
     # @param   [Hash] **opts
     # @return [void]
     def notify(channel: '#general', content: nil, **opts)
